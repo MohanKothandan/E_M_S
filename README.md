@@ -6,25 +6,25 @@ A web-based Employee Management System (EMS) built using **HTML**, **CSS**, **Ja
 
 ---
 
-## 🔗 Live Project
+##  Live Project
 
-🔗 **Access the Project Here**: [https://emstrail1.netlify.app](https://emstrail1.netlify.app).
+ **Access the Project Here**: [https://emstrail1.netlify.app](https://emstrail1.netlify.app).
 
 ---
 
-## 🔐 Test Login Credentials
+##  Test Login Credentials
 
 You can use the following demo accounts to test different dashboards:
 
-### 👑 Admin
+###  Admin
 - Id: `admin
 - Password: `admin1234`
 
-### 🧑‍💼 HR
+###  HR
 - Email: `hr2@gmail.com`
 - Password: `hr2345`
 
-### 👷 Employee
+###  Employee
 - Email: `sms@gmail.com`
 - Password: `sms123`
 
@@ -52,18 +52,18 @@ You can use the following demo accounts to test different dashboards:
 
 - **Frontend**: HTML, CSS, JavaScript
 - **Backend**: Firebase Authentication + Firestore
-## 📸 Screenshots
+##  Screenshots
 
-### 🔐 Main  Page
+###  Main  Page
 ![EMS](Screenshots/mainpage.png)
 
-### 🧑‍💼 Admin Dashboard
+###  Admin Dashboard
 ![Dashboard](Screenshots/Admindashboard.png)
 
-### 🕒 Attendance Page
+###  Attendance Page
 ![Attendance](Screenshots/Attendencerecord.png)
 
-### 📄 Leave Request Page
+###  Leave Request Page
 ![Leave](Screenshots/Leaverequest.png)
 
 ### HR DASHBOARD Page
@@ -73,7 +73,7 @@ You can use the following demo accounts to test different dashboards:
 
 
 
--## 👥 Team Members
+##  Team Members
 
 - **Mohan K** – Team Lead  
 - **Suriya J** – Team Member  
