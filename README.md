@@ -52,6 +52,7 @@ You can use the following demo accounts to test different dashboards:
 
 - **Frontend**: HTML, CSS, JavaScript
 - **Backend**: Firebase Authentication + Firestore
+🔐 Firebase keys have been removed. To test this app, create your own Firebase project and replace the config.
 ##  Screenshots
 
 ###  Main  Page
