@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Leave Application Form</title>
-  <style>
+ <style>
     * {
       box-sizing: border-box;
     }
@@ -12,7 +12,7 @@
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #f0f4f8, #d9e4f5);
+      background: linear-gradient(135deg, #0A2240, #1A4E81); /* Dark blue gradient */
       display: flex;
       align-items: center;
       justify-content: center;
@@ -21,17 +21,17 @@
     }
 
     .form-container {
-      background: #ffffff;
+      background: #ffffff; /* Container background is white */
       padding: 40px;
       border-radius: 12px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 10px 25px rgba(10, 34, 64, 0.2); /* Shadow with darker blue tint */
       width: 100%;
       max-width: 600px;
     }
 
     .form-container h2 {
       margin-bottom: 30px;
-      color: #1A2980;
+      color: #0A2240; /* Dark blue for heading */
       text-align: center;
     }
 
@@ -40,23 +40,23 @@
       margin-top: 15px;
       margin-bottom: 6px;
       font-weight: 600;
-      color: #333;
+      color: #333333; /* Darker color for labels on white background */
     }
 
     input, select, textarea {
       width: 100%;
       padding: 12px 14px;
       font-size: 15px;
-      border: 1px solid #ccc;
+      border: 1px solid #cccccc; /* Slightly darker border for better contrast */
       border-radius: 8px;
-      background-color: #f9f9f9;
+      background-color: #f9f9f9; /* Light grey for input fields */
       transition: border 0.3s ease;
     }
 
     input:focus, select:focus, textarea:focus {
-      border-color: #1A2980;
+      border-color: #1A4E81; /* Professional blue on focus */
       outline: none;
-      background-color: #fff;
+      background-color: #ffffff; /* White background on focus */
     }
 
     textarea {
@@ -69,7 +69,7 @@
       padding: 12px 24px;
       font-size: 16px;
       font-weight: 600;
-      background-color: #1A2980;
+      background-color: #1A4E81; /* Professional blue for buttons */
       color: white;
       border: none;
       border-radius: 10px;
@@ -79,13 +79,14 @@
     }
 
     button:hover {
-      background-color: #26D0CE;
+      background-color: #0A2240; /* Darker blue on hover */
     }
 
     #leaveMessage {
       margin-top: 20px;
       text-align: center;
       font-weight: bold;
+      color: #333333; /* Darker color for messages on white background */
     }
 
     #statusTable {
@@ -98,11 +99,12 @@
       padding: 10px;
       border: 1px solid #ccc;
       text-align: left;
+      color: #333333; /* Darker text for table content */
     }
 
     #statusTable th {
-      background-color: #f0f4f8;
-      color: #1A2980;
+      background-color: #e0eaf5; /* A light blue for table headers */
+      color: #0A2240; /* Dark blue for table header text */
     }
 
     #statusContainer {
@@ -149,15 +151,16 @@
 
   <script>
     // Your Firebase config
-  const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "your-project-id.firebaseapp.com",
-    projectId: "your-project-id",
-    storageBucket: "your-project-id.appspot.com",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID",
-    measurementId: "YOUR_MEASUREMENT_ID"
-  };
+ const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "your-project-id.firebaseapp.com",
+  projectId: "your-project-id",
+  storageBucket: "your-project-id.appspot.com",
+  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+  appId: "YOUR_APP_ID",
+  measurementId: "YOUR_MEASUREMENT_ID"
+};
+
 
     firebase.initializeApp(firebaseConfig);
 
