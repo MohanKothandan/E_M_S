@@ -82,10 +82,10 @@ You can use the following demo accounts to test different dashboards:
 
 ##  Team Members
 
-- **Mohan K** – Team Lead  
+- **Mohan K** – Team Lead (Frontend & Backend Developer)
 - **Suriya J** – Team Member (Developer)  
 - **I. Mickey Samuel** – Team Member (Designer)  
-- **A. Yokeshvaran** – Team Member (Testing)
+- **A. Yokeshvaran** – Team Member (Tester)
 
 
 
