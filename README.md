@@ -74,7 +74,7 @@ You can use the following demo accounts to test different dashboards:
 ![HR](Screenshots/HRdashboard.png)
 
 ### Employee Profile
-![Profile ](Screenshots/Empattend.png)
+![Profile ](Screenshots/Profile.png)
 
 ---
 
