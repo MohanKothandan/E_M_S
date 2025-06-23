@@ -1,6 +1,6 @@
 # Employee Management System 
 
-[![View Demo](https://img.shields.io/badge/Live-Demo-blue)](https://emstrail1.netlify.app)
+[![View Demo](https://img.shields.io/badge/Live-Demo-blue)](https://ems-2-0.netlify.app/)
 
 A web-based Employee Management System (EMS) built using **HTML**, **CSS**, **JavaScript**, and **Firebase**. This system includes login authentication, role-based dashboards (Admin, HR, Employee), attendance tracking, and leave application management.
 
@@ -8,7 +8,7 @@ A web-based Employee Management System (EMS) built using **HTML**, **CSS**, **Ja
 
 ##  Live Project
 
- **Access the Project Here**: [https://emstrail1.netlify.app](https://emstrail1.netlify.app).
+ **Access the Project Here**: [https://ems-2-0.netlify.app/](https://ems-2-0.netlify.app/).
 
 ---
 
@@ -62,13 +62,19 @@ You can use the following demo accounts to test different dashboards:
 ![Dashboard](Screenshots/Admindashboard.png)
 
 ###  Attendance Page
-![Attendance](Screenshots/Attendencerecord.png)
+![Attendance](Screenshots/Empattend.png)
 
 ###  Leave Request Page
-![Leave](Screenshots/Leaverequest.png)
+![Leave](Screenshots/Leave.png)
+
+### HR Login page
+![Login page](Screenshots/Hrlogin.png)
 
 ### HR DASHBOARD Page
-![HR](Screenshots/Hrdashboard.png)
+![HR](Screenshots/HRdashboard.png)
+
+### Employee Profile
+![Profile ](Screenshots/Empattend.png)
 
 ---
 
@@ -77,9 +83,9 @@ You can use the following demo accounts to test different dashboards:
 ##  Team Members
 
 - **Mohan K** – Team Lead  
-- **Suriya J** – Team Member  
-- **I. Mickey Samuel** – Team Member  
-- **A. Yokeshvaran** – Team Member
+- **Suriya J** – Team Member (Developer)  
+- **I. Mickey Samuel** – Team Member (Designer)  
+- **A. Yokeshvaran** – Team Member (Testing)
 
 
 
