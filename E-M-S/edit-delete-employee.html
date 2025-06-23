@@ -1,159 +1,396 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Edit/Delete Employees</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: #eef2f3;
-      padding: 20px;
-    }
-    h2 {
-      text-align: center;
-      color: #007991;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      overflow: hidden;
-    }
-    th, td {
-      padding: 15px;
-      text-align: left;
-      border-bottom: 1px solid #ddd;
-    }
-    th {
-      background: #007991;
-      color: white;
-    }
-    tr:hover {
-      background-color: #f1f1f1;
-    }
-    button {
-      padding: 6px 12px;
-      margin: 0 5px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      color: white;
-    }
-    .edit-btn {
-      background-color: #007bff;
-    }
-    .delete-btn {
-      background-color: #dc3545;
-    }
-    .save-btn {
-      background-color: #28a745;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit/Delete Employees</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #1e3c72;
+            --secondary-blue: #2a5298;
+            --light-background: linear-gradient(135deg, #f0f4f8, #d9e4f5);
+            --text-dark: #333;
+            --text-medium: #555;
+            --card-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            --delete-red: #dc3545;
+            --delete-red-hover: #c82333;
+            --save-green: #28a745;
+            --save-green-hover: #218838;
+            --edit-blue: #007bff; /* Keep original edit blue, or change to secondary-blue if preferred */
+            --edit-blue-hover: #0069d9;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: var(--light-background); /* Consistent light blue gradient */
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align to top, allow scrolling */
+            min-height: 100vh; /* Ensure full viewport height */
+            padding: 50px 20px; /* Ample padding around the main content */
+            color: var(--text-dark);
+        }
+
+        .container {
+            background: white; /* Solid white background for the main content area */
+            padding: 40px;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 1000px; /* Wider max-width for the table */
+            box-shadow: var(--card-shadow); /* Consistent shadow */
+        }
+
+        h2 {
+            text-align: center;
+            color: var(--primary-blue); /* Dark blue heading */
+            margin-bottom: 30px; /* More space below heading */
+            font-size: 2.2em; /* Larger, consistent heading size */
+            font-weight: 700;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate; /* Use separate for rounded corners */
+            border-spacing: 0; /* Remove space between cells */
+            background: white;
+            border-radius: 12px; /* Rounded corners for the entire table */
+            overflow: hidden; /* Ensures rounded corners are visible */
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08); /* Subtle table shadow */
+        }
+
+        th, td {
+            padding: 15px; /* More padding */
+            text-align: left;
+            border-bottom: 1px solid #eee; /* Lighter border for rows */
+            color: var(--text-dark);
+        }
+
+        th {
+            background: var(--primary-blue); /* Dark blue header background */
+            color: white; /* White text for headers */
+            font-weight: 600;
+            font-size: 1.05em;
+            text-transform: capitalize; /* Capitalize column names */
+        }
+
+        /* Rounded corners for first/last th */
+        th:first-child { border-top-left-radius: 12px; }
+        th:last-child { border-top-right-radius: 12px; }
+
+        /* Remove border for the last row */
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8fafd; /* Light alternate row color */
+        }
+
+        tr:hover td {
+            background-color: rgba(42, 82, 152, 0.1); /* Subtle hover effect with secondary blue */
+            color: var(--text-dark); /* Keep text readable on hover */
+        }
+
+        /* Styling for editable cells */
+        td[contenteditable="true"] {
+            border: 1px dashed var(--secondary-blue); /* Dashed border to indicate editability */
+            background-color: #fffde7; /* Light yellow background when editable */
+            padding: 14px; /* Adjust padding if border adds space */
+        }
+
+        button {
+            padding: 10px 18px; /* Consistent padding */
+            margin: 0 5px;
+            border: none;
+            border-radius: 8px; /* Consistent border-radius */
+            cursor: pointer;
+            color: white;
+            font-size: 0.95em;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+            white-space: nowrap; /* Prevent button text from wrapping */
+        }
+
+        button:hover {
+            transform: translateY(-2px); /* Slight lift on hover */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Subtle shadow on hover */
+        }
+        button:active {
+            transform: translateY(0); /* Remove lift on click */
+            box-shadow: none;
+        }
+
+        .edit-btn {
+            background-color: var(--edit-blue); /* Standard blue for edit */
+        }
+        .edit-btn:hover {
+            background-color: var(--edit-blue-hover);
+        }
+
+        .delete-btn {
+            background-color: var(--delete-red); /* Consistent red for delete */
+        }
+        .delete-btn:hover {
+            background-color: var(--delete-red-hover);
+        }
+
+        .save-btn {
+            background-color: var(--save-green); /* Consistent green for save */
+        }
+        .save-btn:hover {
+            background-color: var(--save-green-hover);
+        }
+
+        /* Responsive Table */
+        @media (max-width: 992px) {
+            .container {
+                padding: 30px;
+            }
+            th, td {
+                padding: 12px;
+            }
+            h2 {
+                font-size: 1.8em;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+            }
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+            thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+            tr {
+                border: 1px solid #eee;
+                margin-bottom: 15px;
+                border-radius: 10px;
+                overflow: hidden;
+            }
+            td {
+                border: none;
+                border-bottom: 1px solid #eee;
+                position: relative;
+                padding-left: 50%; /* Space for pseudo-element label */
+                text-align: right;
+            }
+            td:last-child {
+                border-bottom: none;
+            }
+            td:before {
+                content: attr(data-label); /* Use data-label for mobile view */
+                position: absolute;
+                left: 15px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+                text-align: left;
+                font-weight: 600;
+                color: var(--primary-blue);
+            }
+            /* Assigning labels for mobile view */
+            td:nth-of-type(1):before { content: "Employee ID:"; }
+            td:nth-of-type(2):before { content: "Name:"; }
+            td:nth-of-type(3):before { content: "Email:"; }
+            td:nth-of-type(4):before { content: "Actions:"; }
+
+            td[contenteditable="true"] {
+                padding-left: calc(50% - 1px); /* Adjust padding for mobile view with border */
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 30px 10px;
+            }
+            .container {
+                padding: 15px;
+                border-radius: 10px;
+            }
+            h2 {
+                font-size: 1.6em;
+                margin-bottom: 20px;
+            }
+            th, td {
+                padding: 10px;
+                font-size: 0.9em;
+            }
+            button {
+                padding: 8px 12px;
+                font-size: 0.85em;
+            }
+            td:before {
+                font-size: 0.85em;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<h2>Edit/Delete Employees</h2>
+<div class="container">
+    <h2>Edit/Delete Employees</h2>
 
-<table id="employeeTable">
-  <thead>
-    <tr>
-      <th>Employee ID</th>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <!-- Rows will be injected by JS -->
-  </tbody>
-</table>
+    <table id="employeeTable">
+        <thead>
+            <tr>
+                <th>Employee ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            </tbody>
+    </table>
+</div>
 
-<!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 <script>
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "your-project-id.firebaseapp.com",
-    projectId: "your-project-id",
-    storageBucket: "your-project-id.appspot.com",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID",
-    measurementId: "YOUR_MEASUREMENT_ID"
-  };
+  apiKey: "YOUR_API_KEY",
+  authDomain: "your-project-id.firebaseapp.com",
+  projectId: "your-project-id",
+  storageBucket: "your-project-id.appspot.com",
+  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+  appId: "YOUR_APP_ID",
+  measurementId: "YOUR_MEASUREMENT_ID"
+};
 
-firebase.initializeApp(firebaseConfig);</script>
+
+    firebase.initializeApp(firebaseConfig);
+</script>
 
 <script>
-  const dbRef = firebase.database().ref("employees");
+    const dbRef = firebase.database().ref("employees");
 
-  // Load all employees
-  function loadEmployees() {
-    dbRef.once("value", snapshot => {
-      const tableBody = document.querySelector("#employeeTable tbody");
-      tableBody.innerHTML = "";
+    // Load all employees
+    function loadEmployees() {
+        dbRef.once("value", snapshot => {
+            const tableBody = document.querySelector("#employeeTable tbody");
+            tableBody.innerHTML = ""; // Clear existing rows
 
-      snapshot.forEach(childSnapshot => {
-        const empId = childSnapshot.key;
-        const emp = childSnapshot.val();
+            if (!snapshot.exists()) {
+                tableBody.innerHTML = `<tr><td colspan="4" style="text-align: center; padding: 20px; color: var(--text-medium);">No employees found.</td></tr>`;
+                return;
+            }
 
-        const row = document.createElement("tr");
-        row.innerHTML = `
-          <td>${empId}</td>
-          <td contenteditable="false">${emp.name}</td>
-          <td contenteditable="false">${emp.email}</td>
-          <td>
-            <button class="edit-btn">Edit</button>
-            <button class="delete-btn">Delete</button>
-          </td>
-        `;
-        tableBody.appendChild(row);
+            snapshot.forEach(childSnapshot => {
+                const empId = childSnapshot.key;
+                const emp = childSnapshot.val();
 
-        const editBtn = row.querySelector(".edit-btn");
-        const deleteBtn = row.querySelector(".delete-btn");
-        const nameCell = row.children[1];
-        const emailCell = row.children[2];
+                const row = document.createElement("tr");
+                // Added data-label attributes for responsive table on mobile
+                row.innerHTML = `
+                    <td data-label="Employee ID">${empId}</td>
+                    <td data-label="Name" contenteditable="false">${emp.name || ''}</td>
+                    <td data-label="Email" contenteditable="false">${emp.email || ''}</td>
+                    <td data-label="Actions">
+                        <button class="edit-btn">Edit</button>
+                        <button class="delete-btn">Delete</button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
 
-        editBtn.onclick = () => {
-          if (editBtn.textContent === "Edit") {
-            nameCell.contentEditable = "true";
-            emailCell.contentEditable = "true";
-            nameCell.focus();
-            editBtn.textContent = "Save";
-            editBtn.className = "save-btn";
-          } else {
-            // Save edited data
-            const newName = nameCell.textContent.trim();
-            const newEmail = emailCell.textContent.trim();
+                const editBtn = row.querySelector(".edit-btn");
+                const deleteBtn = row.querySelector(".delete-btn");
+                const nameCell = row.children[1];
+                const emailCell = row.children[2];
 
-            dbRef.child(empId).update({ name: newName, email: newEmail })
-              .then(() => {
-                alert("Employee updated");
-                nameCell.contentEditable = "false";
-                emailCell.contentEditable = "false";
-                editBtn.textContent = "Edit";
-                editBtn.className = "edit-btn";
-              });
-          }
-        };
+                editBtn.onclick = () => {
+                    if (editBtn.textContent === "Edit") {
+                        nameCell.contentEditable = "true";
+                        emailCell.contentEditable = "true";
+                        nameCell.focus(); // Focus on the name field for immediate editing
+                        editBtn.textContent = "Save";
+                        editBtn.className = "save-btn"; // Change class for styling
+                        // Add a visual cue to editable cells
+                        nameCell.classList.add('is-editing');
+                        emailCell.classList.add('is-editing');
+                    } else {
+                        // Save edited data
+                        const newName = nameCell.textContent.trim();
+                        const newEmail = emailCell.textContent.trim();
 
-        deleteBtn.onclick = () => {
-          if (confirm("Are you sure you want to delete this employee?")) {
-            dbRef.child(empId).remove()
-              .then(() => {
-                alert("Employee deleted");
-                row.remove();
-              });
-          }
-        };
-      });
-    });
-  }
+                        // Basic validation (optional, can be expanded)
+                        if (!newName || !newEmail) {
+                            alert("Name and Email cannot be empty.");
+                            return;
+                        }
+                        if (!newEmail.includes('@') || !newEmail.includes('.')) {
+                            alert("Please enter a valid email address.");
+                            return;
+                        }
 
-  loadEmployees();
+                        dbRef.child(empId).update({ name: newName, email: newEmail })
+                            .then(() => {
+                                alert("Employee updated successfully!");
+                                nameCell.contentEditable = "false";
+                                emailCell.contentEditable = "false";
+                                editBtn.textContent = "Edit";
+                                editBtn.className = "edit-btn"; // Revert class
+                                // Remove visual cue
+                                nameCell.classList.remove('is-editing');
+                                emailCell.classList.remove('is-editing');
+                            })
+                            .catch(error => {
+                                alert("Error updating employee: " + error.message);
+                                // Optionally revert changes on error
+                                nameCell.contentEditable = "false";
+                                emailCell.contentEditable = "false";
+                                editBtn.textContent = "Edit";
+                                editBtn.className = "edit-btn";
+                                nameCell.classList.remove('is-editing');
+                                emailCell.classList.remove('is-editing');
+                            });
+                    }
+                };
+
+                deleteBtn.onclick = () => {
+                    if (confirm("Are you sure you want to delete this employee? This action cannot be undone.")) {
+                        dbRef.child(empId).remove()
+                            .then(() => {
+                                alert("Employee deleted successfully!");
+                                row.remove(); // Remove the row from the table
+                            })
+                            .catch(error => {
+                                alert("Error deleting employee: " + error.message);
+                            });
+                    }
+                };
+            });
+        }).catch(error => {
+            console.error("Error loading employees:", error);
+            const tableBody = document.querySelector("#employeeTable tbody");
+            tableBody.innerHTML = `<tr><td colspan="4" style="text-align: center; padding: 20px; color: #dc3545;">Error loading employees. Please try again.</td></tr>`;
+        });
+    }
+
+    // Initial load
+    loadEmployees();
+
+    // Add a class for contenteditable styling if needed
+    const styleElement = document.createElement('style');
+    styleElement.innerHTML = `
+        .is-editing {
+            border: 1px dashed var(--secondary-blue);
+            background-color: #fffde7;
+            outline: none; /* Remove default focus outline */
+        }
+    `;
+    document.head.appendChild(styleElement);
 </script>
 
 </body>
