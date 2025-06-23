@@ -9,15 +9,26 @@
       box-sizing: border-box;
     }
 
+   :root {
+        /* ... (rest of your root variables remain the same) ... */
+        --primary-blue: #1e3c72; /* A deep, professional blue */
+        --secondary-blue: #2a5298; /* A slightly lighter, complementary blue */
+        /* REMOVED: --light-background-gradient: linear-gradient(135deg, #f0f4f8, #d9e4f5); */
+        /* ... (rest of your root variables) ... */
+    }
+
     body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #f0f4f8, #d9e4f5);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      padding: 20px;
+        /* CHANGED: Solid blue background */
+        background: var(--primary-blue); /* Sets the background to your primary dark blue */
+        /* If you prefer a different blue, replace var(--primary-blue) with your desired hex code, e.g., #007bff */
+
+        font-family: 'Poppins', sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 60px 20px;
+        min-height: 100vh;
+        box-sizing: border-box;
     }
 
     .form-container {
@@ -148,7 +159,7 @@
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
 
   <script>
-   const firebaseConfig = {
+  const firebaseConfig = {
     apiKey: "YOUR_API_KEY",
     authDomain: "your-project-id.firebaseapp.com",
     projectId: "your-project-id",
@@ -157,6 +168,7 @@
     appId: "YOUR_APP_ID",
     measurementId: "YOUR_MEASUREMENT_ID"
   };
+
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
