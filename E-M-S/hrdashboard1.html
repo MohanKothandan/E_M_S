@@ -8,18 +8,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         :root {
-            --primary-gradient: linear-gradient(to right, #007991, #78ffd6);
-            --primary-color: #007991;
-            --secondary-color: #78ffd6;
-            --background-light: #f3f8fa; /* Main page background */
-            --tile-idle-border: #e0e0e0; /* Border for idle tiles */
-            --tile-hover-bg: #007991; /* Background on hover */
-            --tile-important-idle-bg: #e6f9ff; /* Subtle background for important tiles */
-            --tile-important-border: #00c49a; /* Border for important tiles */
+            --primary-gradient: linear-gradient(to right, #1e3c72, #2a5298); /* Updated to new dark blue gradient */
+            --primary-color: #1e3c72; /* Primary dark blue color */
+            --secondary-color: #2a5298; /* Slightly lighter blue for secondary elements */
+            --background-light: #f3f8fa; /* Main page background (kept light for contrast) */
+            --tile-idle-border: #e0e0e0; /* Border for idle tiles (kept light grey) */
+            --tile-hover-bg: #2a5298; /* New hover background blue */
+            --tile-important-idle-bg: #eaf1f8; /* Subtle light blue background for important tiles */
+            --tile-important-border: #1e3c72; /* Border for important tiles */
             --text-dark: #333333;
             --text-light: #666666;
-            --logout-color: #ff4d4d;
-            --logout-hover: #cc0000;
+            --logout-color: #dc3545; /* Standard red for logout */
+            --logout-hover: #c82333; /* Darker red on logout hover */
         }
 
         body {
@@ -77,7 +77,7 @@
         }
 
         .announcement-btn:hover {
-            background: #eef9ff;
+            background: #eef4ff; /* Lighter blue on hover */
             transform: translateY(-1px);
             box-shadow: 0 2px 8px rgba(0,0,0,0.15);
         }
@@ -99,7 +99,7 @@
             font-weight: 600;
             font-size: 1em;
             letter-spacing: 0.5px;
-            box-shadow: 0 1px 4px rgba(255, 77, 77, 0.2);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
             transition: background 0.2s ease-out, transform 0.2s ease-out;
         }
 
@@ -130,12 +130,11 @@
 
         /* Styling for the clickable <a> tags (which are our "cards") */
         .card {
-            /* DIRECT BUTTON / FLAT TILE STYLING */
-            display: flex; /* Make it a flex container */
+            display: flex;
             flex-direction: column;
-            justify-content: space-between; /* Space out content */
+            justify-content: space-between;
             align-items: center;
-            
+
             background-color: var(--background-light);
             border: 1px solid var(--tile-idle-border);
             border-radius: 8px;
@@ -144,8 +143,8 @@
             box-shadow: none;
             cursor: pointer;
             transition: all 0.3s ease;
-            text-decoration: none; /* Remove underline from <a> */
-            color: inherit; /* Inherit text color for consistency */
+            text-decoration: none;
+            color: inherit;
 
             opacity: 0;
             animation: fadeInUp 0.5s ease forwards;
@@ -160,14 +159,13 @@
         .card:nth-child(7) { animation-delay: 0.35s; }
         .card:nth-child(8) { animation-delay: 0.40s; }
 
-
         .card:hover,
-        .card:focus { /* Use :focus for keyboard navigation */
+        .card:focus {
             background-color: var(--tile-hover-bg);
             border-color: var(--tile-hover-bg);
             transform: translateY(-3px);
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            outline: none; /* Remove default browser outline for focus, managed by design */
+            outline: none;
         }
 
         /* Styling for Important Cards */
@@ -215,7 +213,7 @@
         .card p {
             font-size: 0.95em;
             color: var(--text-light); /* Idle state color */
-            margin-bottom: 0; /* No margin below paragraph as button is gone */
+            margin-bottom: 0;
             flex-grow: 1;
             line-height: 1.4;
         }
@@ -224,10 +222,6 @@
         .card:focus p {
             color: rgba(255, 255, 255, 0.9); /* Paragraph text turns lighter white on hover/focus */
         }
-        
-        /* The previous inner button styles are no longer needed as the <a> tag handles clicks */
-        /* .card button { ... } */
-
 
         .skip-link {
             position: absolute;
@@ -269,12 +263,6 @@
             header h1 {
                 font-size: 2.5em;
             }
-        }
-
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2em;
-            }
             header p {
                 font-size: 1em;
             }
@@ -288,8 +276,8 @@
                 display: block;
             }
             .logout-btn button, .announcement-btn {
-                 width: 100%;
-                 box-sizing: border-box;
+                width: 100%;
+                box-sizing: border-box;
             }
             .card {
                 padding: 25px;
@@ -299,6 +287,15 @@
             }
             .card p {
                 font-size: 0.9em;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+            header p {
+                font-size: 1em;
             }
         }
 
@@ -377,15 +374,16 @@
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 <script>
-    const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "your-project-id.firebaseapp.com",
-    projectId: "your-project-id",
-    storageBucket: "your-project-id.appspot.com",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID",
-    measurementId: "YOUR_MEASUREMENT_ID"
-  };
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "your-project-id.firebaseapp.com",
+  projectId: "your-project-id",
+  storageBucket: "your-project-id.appspot.com",
+  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+  appId: "YOUR_APP_ID",
+  measurementId: "YOUR_MEASUREMENT_ID"
+};
+
 
     firebase.initializeApp(firebaseConfig);
 </script>
