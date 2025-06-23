@@ -1,142 +1,255 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HR Attendance Dashboard</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Attendance Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+    <style>
+        :root {
+            --primary-blue: #1e3c72;
+            --secondary-blue: #2a5298;
+            --light-background: linear-gradient(135deg, #f0f4f8, #d9e4f5);
+            --text-dark: #333;
+            --text-medium: #555;
+            --text-light: #888;
+            --card-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
 
-    body {
-      background: linear-gradient(135deg, #007991, #78ffd6);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      padding: 20px;
-      color: #fff;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
 
-    .container {
-      background: rgba(0, 0, 0, 0.3);
-      padding: 40px;
-      border-radius: 15px;
-      width: 80%;
-      max-width: 800px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-      backdrop-filter: blur(10px);
-    }
+        body {
+            background: var(--light-background); /* Consistent light blue gradient */
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align to top, allow scrolling if needed */
+            min-height: 100vh; /* Use min-height to allow content to extend page */
+            padding: 40px 20px; /* Overall page padding */
+            color: var(--text-dark); /* Default text color */
+        }
 
-    .header { text-align: center; font-size: 26px; margin-bottom: 20px; }
+        .container {
+            background: white; /* Solid white background for content container */
+            padding: 40px;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 900px; /* Slightly wider max-width for better table display */
+            box-shadow: var(--card-shadow); /* Consistent shadow */
+        }
 
-    table {
-      width: 100%;
-      border-collapse: separate;
-      border-spacing: 0;
-      background: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(8px);
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    }
+        .header {
+            text-align: center;
+            font-size: 2.2em; /* Larger, consistent heading size */
+            margin-bottom: 30px;
+            color: var(--primary-blue); /* Dark blue heading */
+            font-weight: 700;
+        }
 
-    th, td {
-      padding: 14px;
-      text-align: center;
-      border-bottom: 2px solid rgba(255, 255, 255, 0.2);
-      color: white;
-    }
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: white; /* Table background */
+            border-radius: 12px; /* Rounded corners for table */
+            overflow: hidden; /* Ensures rounded corners are applied correctly */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08); /* Subtle table shadow */
+        }
 
-    th {
-      background: rgba(255, 255, 255, 0.3);
-      text-transform: uppercase;
-      font-weight: bold;
-    }
+        th, td {
+            padding: 15px; /* More padding */
+            text-align: left; /* Align text left for better readability */
+            border-bottom: 1px solid #eee; /* Light border between rows */
+            color: var(--text-dark); /* Default cell text color */
+        }
 
-    td:first-child { /* Highlight Employee Name */
-      background-color: rgba(0, 123, 255, 0.4);
-      font-weight: bold;
-    }
+        th {
+            background: var(--primary-blue); /* Dark blue header background */
+            color: white; /* White text for headers */
+            text-transform: capitalize; /* Capitalize for cleaner look */
+            font-weight: 600;
+            font-size: 1.05em;
+        }
 
-    tr:nth-child(even) { background: rgba(255, 255, 255, 0.1); }
+        /* Rounded corners for table header */
+        th:first-child { border-top-left-radius: 12px; }
+        th:last-child { border-top-right-radius: 12px; }
 
-    tr:hover td { background: rgba(30, 60, 114, 0.4); color: white; font-weight: bold; }
-  </style>
+        /* Remove bottom border for last row */
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8fafd; /* Light alternate row color */
+        }
+
+        tr:hover td {
+            background-color: rgba(42, 82, 152, 0.1); /* Subtle hover effect with secondary blue */
+            color: var(--text-dark); /* Keep text readable on hover */
+        }
+
+        /* Fixing the "first part not showing" issue and general styling for first column */
+        td:first-child {
+            font-weight: 600; /* Make employee name bold */
+            color: var(--primary-blue); /* Highlight employee name with primary blue */
+            background-color: transparent; /* Remove conflicting background */
+        }
+
+        /* Responsive Table for smaller screens */
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+            }
+            .header {
+                font-size: 1.8em;
+                margin-bottom: 20px;
+            }
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+            thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+            tr {
+                border: 1px solid #eee;
+                margin-bottom: 15px;
+                border-radius: 10px;
+                overflow: hidden;
+            }
+            td {
+                border: none;
+                border-bottom: 1px solid #eee;
+                position: relative;
+                padding-left: 50%; /* Space for pseudo-element label */
+                text-align: right;
+            }
+            td:last-child {
+                border-bottom: none;
+            }
+            td:before {
+                content: attr(data-label); /* Use data-label for mobile view */
+                position: absolute;
+                left: 15px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+                text-align: left;
+                font-weight: 600;
+                color: var(--primary-blue);
+            }
+            /* Assigning labels for mobile view */
+            td:nth-of-type(1):before { content: "Employee Name:"; }
+            td:nth-of-type(2):before { content: "Date:"; }
+            td:nth-of-type(3):before { content: "In Time:"; }
+            td:nth-of-type(4):before { content: "Out Time:"; }
+
+            td:first-child { /* Adjust for mobile view if needed */
+                background-color: transparent; /* Ensure no conflicting background */
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 20px 10px;
+            }
+            .container {
+                padding: 15px;
+                border-radius: 10px;
+            }
+            .header {
+                font-size: 1.6em;
+                margin-bottom: 15px;
+            }
+            th, td {
+                padding: 10px;
+                font-size: 0.9em;
+            }
+            td:before {
+                font-size: 0.85em;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
 <div class="container">
-  <div class="header">Employee Attendance Dashboard</div>
+    <div class="header">Employee Attendance Dashboard</div>
 
-  <table id="attendanceTable">
-    <thead>
-      <tr>
-        <th>Employee Name</th>
-        <th>Date</th>
-        <th>In Time</th>
-        <th>Out Time</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- Data will be dynamically inserted here -->
-    </tbody>
-  </table>
+    <table id="attendanceTable">
+        <thead>
+            <tr>
+                <th>Employee Name</th>
+                <th>Date</th>
+                <th>In Time</th>
+                <th>Out Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            </tbody>
+    </table>
 </div>
 
-<!-- Firebase SDK -->
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
 
 <script>
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "your-project-id.firebaseapp.com",
-    projectId: "your-project-id",
-    storageBucket: "your-project-id.appspot.com",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID",
-    measurementId: "YOUR_MEASUREMENT_ID"
-  };
+  apiKey: "YOUR_API_KEY",
+  authDomain: "your-project-id.firebaseapp.com",
+  projectId: "your-project-id",
+  storageBucket: "your-project-id.appspot.com",
+  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+  appId: "YOUR_APP_ID",
+  measurementId: "YOUR_MEASUREMENT_ID"
+};
 
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.firestore();
-  const tableBody = document.querySelector("#attendanceTable tbody");
 
-  async function loadAttendance() {
-    tableBody.innerHTML = `<tr><td colspan="4">Loading...</td></tr>`;
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+    const tableBody = document.querySelector("#attendanceTable tbody");
 
-    try {
-      const snapshot = await db.collection("attendance").orderBy("date", "desc").get();
-      tableBody.innerHTML = ""; // Clear old rows
+    async function loadAttendance() {
+        tableBody.innerHTML = `<tr><td colspan="4" style="text-align: center; padding: 20px; color: var(--text-medium);">Loading attendance data...</td></tr>`;
 
-      if (snapshot.empty) {
-        tableBody.innerHTML = `<tr><td colspan="4">No attendance records found.</td></tr>`;
-        return;
-      }
+        try {
+            const snapshot = await db.collection("attendance").orderBy("date", "desc").get();
+            tableBody.innerHTML = ""; // Clear old rows
 
-      snapshot.forEach(doc => {
-        const data = doc.data();
-        const row = document.createElement("tr");
+            if (snapshot.empty) {
+                tableBody.innerHTML = `<tr><td colspan="4" style="text-align: center; padding: 20px; color: var(--text-medium);">No attendance records found.</td></tr>`;
+                return;
+            }
 
-        row.innerHTML = `
-          <td>${data.employeeName || '-'}</td>
-          <td>${data.date || '-'}</td>
-          <td>${data.inTime || '-'}</td>
-          <td>${data.outTime || '-'}</td>
-        `;
+            snapshot.forEach(doc => {
+                const data = doc.data();
+                const row = document.createElement("tr");
 
-        tableBody.appendChild(row);
-      });
-    } catch (error) {
-      console.error("Error loading attendance:", error);
-      tableBody.innerHTML = `<tr><td colspan="4">Error loading data.</td></tr>`;
+                // Added data-label attributes for responsive table on mobile
+                row.innerHTML = `
+                    <td data-label="Employee Name">${data.employeeName || '-'}</td>
+                    <td data-label="Date">${data.date || '-'}</td>
+                    <td data-label="In Time">${data.inTime || '-'}</td>
+                    <td data-label="Out Time">${data.outTime || '-'}</td>
+                `;
+
+                tableBody.appendChild(row);
+            });
+        } catch (error) {
+            console.error("Error loading attendance:", error);
+            tableBody.innerHTML = `<tr><td colspan="4" style="text-align: center; padding: 20px; color: #dc3545;">Error loading data. Please try again.</td></tr>`;
+        }
     }
-  }
 
-  loadAttendance();
+    loadAttendance();
 </script>
 
 </body>
