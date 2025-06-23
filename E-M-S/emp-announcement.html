@@ -5,7 +5,7 @@
   <title>Employee Announcements</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
-  <style>
+ <style>
     * {
       box-sizing: border-box;
       font-family: 'Poppins', sans-serif;
@@ -14,98 +14,96 @@
     }
 
     body {
-      background-color: #f4f6f9;
+      background: linear-gradient(135deg, #1e3c72, #2a5298); /* Professional dark blue gradient */
       min-height: 100vh;
       display: flex;
       justify-content: center;
-      align-items: flex-start;
+      /* align-items: flex-start;  Consider changing this if content isn't at the top */
       padding: 60px 20px;
+      /* REMOVE THIS LINE: overflow: hidden; */
       position: relative;
-      overflow-x: hidden;
     }
 
     .shape {
       position: absolute;
       border-radius: 50%;
-      background: #1e3c72;
-      opacity: 0.04;
+      background: white; /* White for the floating bubbles */
+      opacity: 0.1;
       z-index: 0;
       animation: float 8s ease-in-out infinite;
     }
 
     .shape1 {
-      width: 180px;
-      height: 180px;
+      width: 200px;
+      height: 200px;
       top: -60px;
       left: -80px;
     }
 
     .shape2 {
-      width: 260px;
-      height: 260px;
+      width: 250px;
+      height: 250px;
       bottom: -100px;
       right: -80px;
     }
 
     @keyframes float {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-15px); }
+      50% { transform: translateY(-20px); }
     }
 
     .container {
-      background-color: white;
+      background-color: white; /* Container background remains white */
       padding: 40px;
-      border-radius: 16px;
-      max-width: 750px;
+      border-radius: 15px;
+      max-width: 700px;
       width: 100%;
-      box-shadow: 0 0 25px rgba(30, 60, 114, 0.2);
+      box-shadow: 0 0 20px rgba(30, 60, 114, 0.2); /* Shadow tint adjusted to new blue */
       position: relative;
       z-index: 1;
-      animation: fadeInSlide 0.8s ease;
+      animation: fadeSlide 1s ease;
     }
 
     h2 {
       text-align: center;
-      color: #1e3c72;
+      color: #1e3c72; /* Heading color to the specified dark blue */
       margin-bottom: 25px;
-      font-size: 26px;
     }
 
     .announcement {
-      border-left: 6px solid #1e3c72;
-      background-color: #f9fbfd;
-      padding: 18px 22px;
+      border-left: 5px solid #1e3c72; /* Announcement border to the specified dark blue */
+      background-color: #f9f9f9; /* Light background for announcements */
+      padding: 15px 20px;
       border-radius: 10px;
       margin-bottom: 20px;
-      box-shadow: 0 4px 10px rgba(30, 60, 114, 0.05);
-      animation: fadeInCard 0.6s ease forwards;
+      animation: fadeIn 0.5s ease forwards;
       opacity: 0;
     }
 
     .announcement .sender {
       font-weight: 600;
       font-size: 14px;
-      color: #1e3c72;
+      color: #333333; /* Darker color for sender for readability */
     }
 
     .announcement .text {
       margin: 10px 0;
       font-size: 15px;
-      color: #333;
+      color: #333333; /* Darker color for text for readability */
     }
 
     .announcement .time {
       font-size: 12px;
-      color: #888;
+      color: #888888; /* Slightly darker grey for time */
       text-align: right;
     }
 
-    @keyframes fadeInSlide {
+    @keyframes fadeSlide {
       from { opacity: 0; transform: translateY(40px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    @keyframes fadeInCard {
+    @keyframes fadeIn {
       to { opacity: 1; }
     }
 
@@ -136,14 +134,15 @@
 
   <script>
  const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "your-project-id.firebaseapp.com",
-    projectId: "your-project-id",
-    storageBucket: "your-project-id.appspot.com",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID",
-    measurementId: "YOUR_MEASUREMENT_ID"
-  };
+  apiKey: "YOUR_API_KEY",
+  authDomain: "your-project-id.firebaseapp.com",
+  projectId: "your-project-id",
+  storageBucket: "your-project-id.appspot.com",
+  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+  appId: "YOUR_APP_ID",
+  measurementId: "YOUR_MEASUREMENT_ID"
+};
+
 
     firebase.initializeApp(firebaseConfig);
 
