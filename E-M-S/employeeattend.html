@@ -5,103 +5,78 @@
   <title>Employee Attendance</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
-  <style>
-    body {
-      background: linear-gradient(135deg, #007991, #78ffd6);
-      font-family: 'Poppins', sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      overflow: hidden;
-      position: relative;
-    }
+<style>
+  body {
+    background: linear-gradient(135deg, #1e3c72, #1A4E81); /* Darker blue gradient */
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+  }
 
-    .container {
-      background: #ffffff;
-      padding: 40px;
-      border-radius: 15px;
-      max-width: 500px;
-      width: 100%;
-      text-align: center;
-      box-shadow: 0 0 25px rgba(0, 123, 145, 0.2);
-      z-index: 1;
-      animation: fadeIn 0.8s ease;
-    }
+  .container {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 15px;
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 0 25px rgba(10, 34, 64, 0.2); /* Shadow with darker blue tint */
+    z-index: 1;
+    animation: fadeIn 0.8s ease;
+  }
 
-    h2 {
-      color: #007991;
-      margin-bottom: 10px;
-    }
+  h2 {
+    color: #0A2240; /* Dark blue for heading */
+    margin-bottom: 10px;
+  }
 
-    #employeeName {
-      font-size: 16px;
-      margin-bottom: 20px;
-      font-weight: 500;
-      color: #333;
-    }
+  #employeeName {
+    font-size: 16px;
+    margin-bottom: 20px;
+    font-weight: 500;
+    color: #333;
+  }
 
-    button {
-      padding: 12px 24px;
-      margin: 10px;
-      background-color: #007991;
-      border: none;
-      border-radius: 8px;
-      color: white;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
+  button {
+    padding: 12px 24px;
+    margin: 10px;
+    background-color: #1A4E81; /* Professional blue for buttons */
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
 
-    button:hover:not(:disabled) {
-      background-color: #006672;
-      transform: scale(1.03);
-    }
+  button:hover:not(:disabled) {
+    background-color: #0A2240; /* Darker blue on hover */
+    transform: scale(1.03);
+  }
 
-    button:disabled {
-      background-color: #ccc;
-      cursor: not-allowed;
-    }
+  button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
 
-    #status {
-      margin-top: 20px;
-      font-weight: bold;
-      color: #444;
-    }
+  #status {
+    margin-top: 20px;
+    font-weight: bold;
+    color: #444;
+  }
 
-    .shape {
-      position: absolute;
-      border-radius: 50%;
-      background: #ffffff;
-      opacity: 0.1;
-      animation: float 8s ease-in-out infinite;
-    }
+  /* Removed .shape, .shape1, .shape2, and @keyframes float to eliminate bubble effect */
 
-    .shape1 {
-      width: 200px;
-      height: 200px;
-      top: -60px;
-      left: -60px;
-    }
-
-    .shape2 {
-      width: 250px;
-      height: 250px;
-      bottom: -100px;
-      right: -100px;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-15px); }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
 </head>
 <body>
 
@@ -125,15 +100,16 @@
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
 
   <script>
-   const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "your-project-id.firebaseapp.com",
-    projectId: "your-project-id",
-    storageBucket: "your-project-id.appspot.com",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID",
-    measurementId: "YOUR_MEASUREMENT_ID"
-  };
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "your-project-id.firebaseapp.com",
+  projectId: "your-project-id",
+  storageBucket: "your-project-id.appspot.com",
+  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+  appId: "YOUR_APP_ID",
+  measurementId: "YOUR_MEASUREMENT_ID"
+};
+
 
     firebase.initializeApp(firebaseConfig);
 
