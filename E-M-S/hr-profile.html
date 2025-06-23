@@ -6,59 +6,134 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet"/>
   <style>
+     :root {
+        /* ... (rest of your root variables remain the same) ... */
+        --primary-blue: #1e3c72; /* A deep, professional blue */
+        --secondary-blue: #2a5298; /* A slightly lighter, complementary blue */
+        /* REMOVED: --light-background-gradient: linear-gradient(135deg, #f0f4f8, #d9e4f5); */
+        /* ... (rest of your root variables) ... */
+    }
+
     body {
-      background: linear-gradient(135deg, #007991, #78ffd6);
-      font-family: 'Poppins', sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      padding: 80px 20px;
-      min-height: 100vh;
+        /* CHANGED: Solid blue background */
+        background: var(--primary-blue); /* Sets the background to your primary dark blue */
+        /* If you prefer a different blue, replace var(--primary-blue) with your desired hex code, e.g., #007bff */
+
+        font-family: 'Poppins', sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 60px 20px;
+        min-height: 100vh;
+        box-sizing: border-box;
     }
 
     .profile-card {
-      background: white;
-      padding: 40px 30px;
-      border-radius: 16px;
-      max-width: 600px;
-      width: 100%;
-      box-shadow: 0 0 25px rgba(0, 123, 145, 0.2);
+        background: white;
+        padding: 40px 45px; /* Increased horizontal padding for better spacing */
+        border-radius: 18px; /* Slightly larger border-radius for softer look */
+        max-width: 650px; /* Slightly wider card */
+        width: 100%;
+        box-shadow: var(--card-shadow); /* Applied consistent shadow */
+        transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for interaction */
+    }
+
+    .profile-card:hover {
+        transform: translateY(-3px); /* Subtle lift on hover */
+        box-shadow: 0 12px 30px rgba(0,0,0,0.2); /* Deeper shadow on hover */
     }
 
     .profile-card h2 {
-      text-align: center;
-      color: #007991;
-      margin-bottom: 30px;
-      font-size: 26px;
+        text-align: center;
+        color: var(--primary-blue); /* Changed to primary dark blue */
+        margin-bottom: 35px; /* Increased margin below heading */
+        font-size: 2.2em; /* Larger font size for main heading */
+        font-weight: 700; /* Bolder font weight */
     }
 
     .profile-item {
-      margin-bottom: 20px;
+        margin-bottom: 25px; /* Increased spacing between profile items */
     }
 
     .profile-item label {
-      display: block;
-      font-weight: 600;
-      color: #007991;
-      margin-bottom: 6px;
-      font-size: 14px;
+        display: block;
+        font-weight: 600;
+        color: var(--text-medium); /* Changed to a softer text color for labels */
+        margin-bottom: 8px; /* More space below label */
+        font-size: 1.05em; /* Slightly larger label font */
     }
 
     .profile-item .value {
-      padding: 10px;
-      border-radius: 8px;
-      background: #f0f8fa;
-      font-size: 15px;
-      color: #333;
-      border: 1px solid #ccc;
+        padding: 14px 18px; /* Increased padding inside value boxes */
+        border-radius: 10px; /* Consistent border-radius for input-like fields */
+        background: #f8fafd; /* Very light, subtle background */
+        font-size: 1.1em; /* Larger font size for values */
+        color: var(--text-dark); /* Darker text for readability */
+        border: 1px solid #e0e0e0; /* Softer border color */
+        word-wrap: break-word; /* Ensures long text wraps */
+        line-height: 1.5; /* Better line spacing for values */
     }
 
     .error {
-      color: red;
-      text-align: center;
-      margin-top: 15px;
+        color: var(--error-red); /* Changed to consistent error red */
+        text-align: center;
+        margin-top: 25px; /* More space above error message */
+        font-size: 1.1em; /* Slightly larger font for errors */
+        font-weight: 600;
     }
-  </style>
+
+    /* Responsive adjustments for smaller screens */
+    @media (max-width: 768px) {
+        body {
+            padding: 40px 15px;
+        }
+        .profile-card {
+            padding: 30px 25px;
+            border-radius: 12px;
+        }
+        .profile-card h2 {
+            font-size: 1.8em;
+            margin-bottom: 25px;
+        }
+        .profile-item {
+            margin-bottom: 20px;
+        }
+        .profile-item label {
+            font-size: 1em;
+            margin-bottom: 5px;
+        }
+        .profile-item .value {
+            padding: 12px 15px;
+            font-size: 1em;
+            border-radius: 8px;
+        }
+        .error {
+            margin-top: 20px;
+            font-size: 1em;
+        }
+    }
+
+    @media (max-width: 480px) {
+        body {
+            padding: 30px 10px;
+        }
+        .profile-card {
+            padding: 25px 20px;
+            border-radius: 10px;
+        }
+        .profile-card h2 {
+            font-size: 1.6em;
+            margin-bottom: 20px;
+        }
+        .profile-item {
+            margin-bottom: 18px;
+        }
+        .profile-item .value {
+            padding: 10px 12px;
+            font-size: 0.95em;
+        }
+    }
+</style>
 </head>
 <body>
 
@@ -94,15 +169,16 @@
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
 
   <script>
-    const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "your-project-id.firebaseapp.com",
-    projectId: "your-project-id",
-    storageBucket: "your-project-id.appspot.com",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID",
-    measurementId: "YOUR_MEASUREMENT_ID"
-  };
+ const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "your-project-id.firebaseapp.com",
+  projectId: "your-project-id",
+  storageBucket: "your-project-id.appspot.com",
+  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+  appId: "YOUR_APP_ID",
+  measurementId: "YOUR_MEASUREMENT_ID"
+};
+
 
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
