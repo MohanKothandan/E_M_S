@@ -4,80 +4,121 @@
   <meta charset="UTF-8">
   <title>Create Employee</title> 
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-  <style>
+ <style>
     * {
       margin: 0;
       padding: 0;
       font-family: 'Poppins', sans-serif;
+      box-sizing: border-box; /* Ensure consistent box model */
     }
 
     body {
-      background: #f3f5f7;
+      background: linear-gradient(135deg, #f0f4f8, #d9e4f5); /* Light blue gradient for the background */
       color: #333;
+      min-height: 100vh; /* Ensure body takes full viewport height */
+      display: flex;
+      flex-direction: column; /* Allow content to stack vertically */
     }
 
     .navbar {
-      background-color: #1e3c72;
+      background-color: #1e3c72; /* Dark blue */
       color: white;
-      padding: 15px;
+      padding: 20px 30px; /* Increased padding */
       text-align: center;
-      font-size: 24px;
+      font-size: 26px; /* Slightly larger font */
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15); /* Subtle shadow */
+      font-weight: 600; /* Bolder text for navbar title */
     }
 
     .container {
-      padding: 30px;
-      max-width: 500px;
-      margin: 30px auto;
+      padding: 40px; /* Increased padding */
+      max-width: 550px; /* Slightly wider */
+      margin: 50px auto; /* More vertical margin */
       background-color: white;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 15px; /* Larger border-radius */
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15); /* More prominent shadow */
+      flex-grow: 1; /* Allow container to grow if content is less than viewport height */
     }
 
     h2 {
-      margin-bottom: 20px;
-      color: #1e3c72;
+      margin-bottom: 25px; /* Increased margin */
+      color: #1e3c72; /* Dark blue */
       text-align: center;
+      font-size: 28px; /* Slightly larger heading */
+      font-weight: 700;
+    }
+
+    label { /* Added label styling for consistency */
+        display: block;
+        margin-top: 15px;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #555;
     }
 
     input, select {
       width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border: 1px solid #ccc;
-      border-radius: 8px;
+      padding: 14px; /* Increased padding */
+      margin: 10px 0 20px 0; /* Adjusted margin for better spacing with labels */
+      border: 1px solid #dcdcdc; /* Lighter, more modern border */
+      border-radius: 10px; /* Larger border-radius */
       font-size: 16px;
+      background-color: #fcfcfc; /* Slightly off-white background */
+      transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+    }
+
+    input:focus, select:focus {
+      border-color: #2a5298; /* Accent blue on focus */
+      outline: none; /* Remove default outline */
+      box-shadow: 0 0 0 3px rgba(42, 82, 152, 0.2); /* Subtle blue glow on focus */
+      background-color: #fff; /* White background on focus */
     }
 
     button {
       width: 100%;
-      padding: 12px;
-      background-color: #1e3c72;
+      padding: 15px; /* Increased padding */
+      background-color: #1e3c72; /* Dark blue */
       color: white;
       border: none;
-      font-size: 16px;
-      border-radius: 8px;
+      font-size: 18px; /* Slightly larger font */
+      font-weight: 600;
+      border-radius: 10px; /* Larger border-radius */
       cursor: pointer;
-      transition: background 0.3s ease;
+      transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transition */
+      margin-top: 20px; /* Add margin to top */
     }
 
     button:hover {
-      background-color: #294f9e;
+      background-color: #2a5298; /* Lighter blue on hover */
+      transform: translateY(-2px); /* Slight lift effect */
+    }
+
+    button:active {
+        transform: translateY(0); /* Remove lift on click */
     }
 
     .message {
-      margin-top: 10px;
-      color: green;
+      margin-top: 15px;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: bold;
       text-align: center;
+      color: #28a745; /* Modern green for success */
+      background-color: #d4edda; /* Light green background */
+      border: 1px solid #c3e6cb;
     }
 
     .error {
-      color: red;
+      color: #dc3545; /* Modern red for error */
+      background-color: #f8d7da; /* Light red background */
+      border: 1px solid #f5c6cb;
     }
   </style>
 </head>
 <body>
 
-  <div class="navbar">HR Dashboard</div>
+  <div class="navbar">Register New Employee </div>
 
   <div class="container">
     <h2>Create Employee Account</h2>
@@ -116,15 +157,16 @@
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
   <script>
-  const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "your-project-id.firebaseapp.com",
-    projectId: "your-project-id",
-    storageBucket: "your-project-id.appspot.com",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID",
-    measurementId: "YOUR_MEASUREMENT_ID"
-  };
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "your-project-id.firebaseapp.com",
+  projectId: "your-project-id",
+  storageBucket: "your-project-id.appspot.com",
+  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+  appId: "YOUR_APP_ID",
+  measurementId: "YOUR_MEASUREMENT_ID"
+};
+
     firebase.initializeApp(firebaseConfig);
   </script>
 
