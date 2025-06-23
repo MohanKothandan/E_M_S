@@ -14,14 +14,14 @@
     }
 
     body {
-      background: linear-gradient(135deg, #007991, #78ffd6);
+      background: linear-gradient(135deg, #1e3c72, #2a5298); /* Dark professional blue gradient */
       min-height: 100vh;
       padding: 30px 20px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
+      overflow: hidden; /* Kept overflow hidden as per original */
       position: relative;
     }
 
@@ -36,7 +36,7 @@
     .shape1 {
       width: 220px;
       height: 220px;
-      background: #ffffff;
+      background: #ffffff; /* White for the floating bubbles */
       top: -60px;
       left: -60px;
     }
@@ -44,7 +44,7 @@
     .shape2 {
       width: 300px;
       height: 300px;
-      background: #ffffff;
+      background: #ffffff; /* White for the floating bubbles */
       bottom: -100px;
       right: -90px;
     }
@@ -55,10 +55,10 @@
     }
 
     .card {
-      background-color: rgba(255, 255, 255, 0.95);
+      background-color: rgba(255, 255, 255, 0.95); /* Semi-transparent white card background */
       padding: 40px;
       border-radius: 15px;
-      box-shadow: 0 0 20px rgba(0, 123, 255, 0.2);
+      box-shadow: 0 0 20px rgba(30, 60, 114, 0.2); /* Shadow tint adjusted to new blue */
       z-index: 1;
       max-width: 400px;
       width: 100%;
@@ -72,20 +72,20 @@
     }
 
     h2 {
-      color: #007991;
+      color: #1e3c72; /* Heading color to the specified dark blue */
       margin-bottom: 20px;
     }
 
     #employeeName {
       font-weight: 600;
       margin-bottom: 20px;
-      color: #333;
+      color: #333; /* Kept dark grey for text */
     }
 
     button {
       padding: 12px 24px;
       margin: 10px 5px;
-      background-color: #007991;
+      background-color: #1e3c72; /* Button background to the specified dark blue */
       border: none;
       border-radius: 8px;
       color: white;
@@ -95,12 +95,12 @@
     }
 
     button:hover:not(:disabled) {
-      background-color: #006070;
+      background-color: #2a5298; /* Slightly lighter blue on hover for buttons */
       transform: scale(1.05);
     }
 
     button:disabled {
-      background-color: #cccccc;
+      background-color: #cccccc; /* Light grey for disabled buttons */
       cursor: not-allowed;
     }
 
@@ -108,7 +108,7 @@
       margin-top: 25px;
       font-size: 14px;
       font-weight: bold;
-      color: #333;
+      color: #333; /* Kept dark grey for status text */
     }
   </style>
 </head>
@@ -137,14 +137,15 @@
   <!-- Firebase Logic (Unchanged) -->
   <script>
  const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "your-project-id.firebaseapp.com",
-    projectId: "your-project-id",
-    storageBucket: "your-project-id.appspot.com",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID",
-    measurementId: "YOUR_MEASUREMENT_ID"
-  };
+  apiKey: "YOUR_API_KEY",
+  authDomain: "your-project-id.firebaseapp.com",
+  projectId: "your-project-id",
+  storageBucket: "your-project-id.appspot.com",
+  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+  appId: "YOUR_APP_ID",
+  measurementId: "YOUR_MEASUREMENT_ID"
+};
+
 
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
